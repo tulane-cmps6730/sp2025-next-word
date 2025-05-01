@@ -1,42 +1,62 @@
-# CMPS 6730 Sample Project
+# Project Summary
+This project explores next-word prediction while typing a message.  
+I compare two transformer-based models, GPT-2 and Unsloth Zephyr (4-bit quantized), evaluating their performance on both normal English prompts and stress testing.
 
-This repository contains starter code for the final project in CMPS 4730/6730: Natural Language Processing at Tulane University.
+---
 
-The code in this repository will be copied into your team's project repository at the start of class to provide a starting point for your project.
+# Goals
+- Investigate how well different language models can predict the next word while typing.
+- Evaluate model performance under both normal and stress-testing conditions.
+- Identify systemic biases and weaknesses (e.g., struggles with typos, code-like syntax).
+- Recommend future improvements for real-world typing assistance systems.
 
-You should edit this file to include a summary of the goals, methods, and conclusions of your project.
+---
 
-The structure of the code supports the following:
+# Methods
+- **Models**:
+  - GPT-2 (baseline)
+  - Unsloth Zephyr SFT (4-bit quantized)
+- **Techniques**:
+  - Top-k Sampling to select the top 3 next-word predictions.
+  - Standard normal prompts (e.g., "The quick brown fox...").
+  - Stress testing with typos, random tokens, and code-like prompts.
+- **Evaluation**:
+  - Top-3 Accuracy on both normal and noisy prompts.
+  - Visual comparison using bar charts.
 
-- A simple web UI using Flask to support a demo of the project
-- A command-line interface to support running different stages of the project's pipeline
-- The ability to easily reproduce your work on another machine by using virtualenv and providing access to external data sources.
+---
 
-### Using this repository
+# Results
 
-- At the start of the course, students will be divided into project teams. Each team will receive a copy of this starter code in a new repository. E.g.:
-https://github.com/tulane-cmps6730/project-alpha
-- Each team member will then clone their team repository to their personal computer to work on their project. E.g.: `git clone https://github.com/tulane-cmps6730/project-alpha`
-- See [GettingStarted.md](GettingStarted.md) for instructions on using the starter code.
+| Test Type               | GPT-2 Accuracy | Unsloth Zephyr Accuracy |
+|--------------------------|----------------|-------------------------|
+| Normal Prompts           | 80%            | 80%                     |
+| Stress Testing Prompts   | 0%             | 33%                     |
+
+- **Normal Prompts**: Both models performed similarly, achieving 80% accuracy.
+- **Stress Testing**: Unsloth Zephyr showed higher robustness against noisy input compared to GPT-2.
+
+---
+
+# Conclusion
+- Both models achieve comparable results on normal English text.
+- Unsloth Zephyr outperforms GPT-2 in handling typos and random input (stress testing).
+- **Future directions**:
+  - Fine-tuning on typo-corrected or noisy datasets.
+  - Adding spell-correction preprocessing.
+  - Expanding to next-phrase prediction instead of next-word only.
+
+---
+
+# Takeaway
+Smaller, efficient models like **Unsloth Zephyr** can achieve competitive results in typing scenarios while offering better robustness against noisy real-world input.
+
+---
+# Screenshot
+
+![image](https://github.com/user-attachments/assets/cd446339-8659-42b4-bf06-88a5a3f0567f)
+![image](https://github.com/user-attachments/assets/bdfdf1bf-1d5e-4ec3-85a2-af0bdaf33c8f)
 
 
-### Contents
 
-- [docs](docs): template to create slides for project presentations
-- [nlp](nlp): Python project code
-- [notebooks](notebooks): Jupyter notebooks for project development and experimentation
-- [report](report): LaTeX report
-- [tests](tests): unit tests for project code
 
-### Background Resources
-
-The following will give you some technical background on the technologies used here:
-
-1. Refresh your Python by completing this online tutorial: <https://www.learnpython.org/> (3 hours)
-2. Create a GitHub account at <https://github.com/>
-3. Setup git by following <https://help.github.com/en/articles/set-up-git> (30 minutes)
-4. Learn git by completing the [Introduction to GitHub](https://lab.github.com/githubtraining/introduction-to-github) tutorial, reading the [git handbook](https://guides.github.com/introduction/git-handbook/), then completing the [Managing merge conflicts](https://lab.github.com/githubtraining/managing-merge-conflicts) tutorial (1 hour).
-5. Install the Python data science stack from <https://www.anaconda.com/distribution/> . **We will use Python 3** (30 minutes)
-6. Complete the scikit-learn tutorial from <https://www.datacamp.com/community/tutorials/machine-learning-python> (2 hours)
-7. Understand how python packages work by going through the [Python Packaging User Guide](https://packaging.python.org/tutorials/) (you can skip the "Creating Documentation" section). (1 hour)
-8. Complete Part 1 of the [Flask tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world), which is the library we will use for making a web demo for your project.
